@@ -1,0 +1,54 @@
+package com.fitness.userservice.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
+
+@Data
+@Entity
+@Table(name = "users")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    private String firstName;
+    private String lastName;
+
+    /**
+     * The {@code @Enumerated} annotation in Spring Boot (JPA) is used to specify how an enum
+     * type should be persisted in the database. It can take one of two values:
+     * <br>
+     *
+     * 1. EnumType.ORDINAL: Stores the ordinal (integer) value of the enum (default behavior).<br>
+     * 2. EnumType.STRING: Stores the name of the enum as a string.
+     */
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
+
+    /**
+     * The @CreationTimestamp annotation in Hibernate is used to automatically set the creation timestamp
+     * of an entity when it is first persisted in the database. It ensures that the field is populated with
+     * the current timestamp at the time of insertion.
+     */
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    /**
+     * The @UpdateTimestamp annotation in Hibernate is used to automatically update a timestamp field
+     * whenever the entity is updated in the database. It works similarly to @CreationTimestamp,
+     * but it is triggered on updates instead of inserts.
+     */
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+}
