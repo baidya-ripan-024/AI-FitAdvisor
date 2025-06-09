@@ -1,0 +1,19 @@
+# server port
+server:
+    port: 8888
+
+# spring boot application name
+spring:
+  application:
+    name: config-server
+
+  # profiles
+  profiles:
+    active: native
+
+  # config server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
