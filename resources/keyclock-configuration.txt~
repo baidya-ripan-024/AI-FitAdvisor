@@ -1,0 +1,13 @@
+Here, we are using keycloak for authentication
+we will never download keycloak and work with it directly. rather, we will work with docker image.
+we will create a docker container for keycloak and run it in iterative mode.
+
+command: docker run -p 8181:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.2.5 start-dev
+
+1. go the keycloak dashboard
+http://localhost:8181/
+give username and password as 'admin'
+
+2. create a realm, in our case: fitness-
+3. create a client
+    - client id: oauth2-pkce-client
